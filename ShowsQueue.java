@@ -278,8 +278,7 @@ public class Shows {
                 System.err.println("Invalid input.");
             }
         }
-
-        //Prints shows in reverse order of the input (LIFO) using pop() 
+        
         while(!userShows.isEmpty()) {
             Show show = userShows.remove();
             show.print(show);
