@@ -129,7 +129,7 @@ class Show {
                 show.setDateAdded(format.parse(dateString));
             }
         }
-        catch (ParseException e) {
+        catch(ParseException e) {
             System.err.println("Error converting date: " + dateString);
             show.setDateAdded(null);
         }
@@ -137,7 +137,7 @@ class Show {
         try {
             show.setReleaseYear(Integer.parseInt(fields.get(7)));
         }
-        catch (NumberFormatException e) {
+        catch(NumberFormatException e) {
             System.err.println("Error converting release year: " + fields.get(7));
             show.setReleaseYear(-1); //Default value in case of error
         }
@@ -203,7 +203,7 @@ public class Shows {
                 shows.add(showReader.readCSV(line)); //Reads each line and add into the ArrayList 
             }
         }   
-        catch (IOException e) {
+        catch(IOException e) {
             System.err.println("Error reading file: " + e.getMessage());
             return; //Exits the program if file cannot be read
         }
@@ -226,7 +226,7 @@ public class Shows {
                     System.out.println("Invalid show ID: " + showId);
                 }
             }
-            catch (NumberFormatException e) {
+            catch(NumberFormatException e) {
                 System.err.println("Invalid input.");
             }
         }
