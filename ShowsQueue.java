@@ -213,10 +213,9 @@ class Queue {
             first = newNode;
             last = newNode;
         }
-        else {
-            last.next = newNode;
-            last = newNode;
-        }
+        
+        last.next = newNode;
+        last = newNode;
     }
 
     public Show remove() {
@@ -225,6 +224,7 @@ class Queue {
         }
         Show showToReturn = first.show;
         first = first.next;
+        
         if(first == null) {
             last = null;
         }
