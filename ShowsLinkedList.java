@@ -188,66 +188,50 @@ class Show {
     }
 }
 
+class Node {
+    public Show show;
+    public Node next;
+
+    public Node(Show show) {
+        this.show = show;
+        this.next = null;
+    }
+}
+
+class LinkedList {
+    private Node head;
+
+    public LinkedList() {
+        this.head = null;
+    }
+
+    public void add(Show show) {
+        Node newNode = new Node(show);
+        if(head == null) {
+            head = newNode;
+        }
+
+        Node current = head;
+        while(current.next != null) {
+            current = current.next;
+        }
+        current.next = newNode;
+    }
+
+    public void printList() {
+        Node current = head;
+        if(head == null) {
+            System.out.println("List is empty.");
+            return;
+        }
+        while(current != null) {
+            current.show.print(current.show);
+            current = current.next;
+        }
+    }
+}
+
 public class Shows {
-    //Method to merge two sorted sub-lists
-    public static void merge(ArrayList<Show> list, int left, int middle, int right) {
-        int n1 = middle - left + 1;
-        int n2 = right - middle;
-
-        //Creates temporary sub-lists
-        ArrayList<Show> leftArray = new ArrayList<>();
-        ArrayList<Show> rightArray = new ArrayList<>();
-
-        //Copies data to the temporary sub-lists
-        for(int i = 0; i < n1; ++i) {
-            leftArray.add(list.get(left + i));
-        }
-        for(int j = 0; j < n2; ++j) {
-            rightArray.add(list.get(middle + 1 + j));
-        }
-
-        int i = 0, j = 0;
-        int k = left;
-        
-        //Merges the temporary sub-lists back into the main list
-        while(i < n1 && j < n2) {
-            if(leftArray.get(i).getTitle().compareTo(rightArray.get(j).getTitle()) <= 0) {
-                list.set(k, leftArray.get(i));
-                i++;
-            }
-            else {
-                list.set(k, rightArray.get(j));
-                j++;
-            }
-            k++;
-        }
-
-        //Copies any remaining elements from the left sub-list
-        while(i < n1) {
-            list.set(k, leftArray.get(i));
-            i++;
-            k++;
-        }
-
-        //Copies any remaining elements from the right sub-list
-        while(j < n2) {
-            list.set(k, rightArray.get(j));
-            j++;
-            k++;
-        }
-    }
-
-    //Main Mergesort method to sort the list by title
-    public static void mergesort(ArrayList<Show> list, int left, int right) {
-        if (left < right) {
-            int middle = (left + right) / 2;
-            mergesort(list, left, middle);
-            mergesort(list, middle + 1, right);
-            merge(list, left, middle, right);
-        }
-    }
-
-
     public static void main(String[] args) {
         ArrayList<Show> shows = new ArrayList<>(); //Creates a list to save show objects
         String filePath = "disneyplus.csv";
@@ -268,7 +252,7 @@ public class Shows {
         }
 
         Scanner sc = new Scanner(System.in);
-        LinkedList<Show> userShows = new LinkedList<>();
+        LinkedList userShows = new LinkedList();
 
         String input;
         while(!(input = sc.nextLine()).equals("FIM")) {
@@ -290,9 +274,7 @@ public class Shows {
             }
         }
 
-        for(Show show : userShows) {
-            show.print(show);
-        }
+        userShows.printList();
 
         sc.close();
     }
